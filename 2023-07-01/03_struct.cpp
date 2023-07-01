@@ -9,8 +9,11 @@ struct Punkt {
     int y;
 };
 
-void wypisz(const Punkt* p) {
-    std::cout << (*p).x << ' ' << p->y << '\n'; //p->y to to samo co (*p).y
+// void wypisz(const Punkt* p) {
+//     std::cout << (*p).x << ' ' << p->y << '\n'; //p->y to to samo co (*p).y
+// }
+void wypisz(const Punkt& p) {
+    std::cout << p.x << ' ' << p.y << '\n';
 }
 
 int main() {
@@ -21,6 +24,6 @@ int main() {
     Punkt q;
     q.x = -3;
     q.y = 4;
-    wypisz(&p);
-    wypisz(&q);
+    wypisz(p);
+    wypisz(q);
 }
