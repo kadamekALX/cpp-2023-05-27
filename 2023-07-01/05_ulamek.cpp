@@ -21,6 +21,17 @@ void ustaw(Ulamek* u, int a, int b) {
     u->mianownik = b;
 }
 
+Ulamek stworz(int licznik = 0, int mianownik = 1) {
+    Ulamek u;
+    u.licznik = licznik;
+    u.mianownik = mianownik;
+    if (u.mianownik == 0) {
+        std::cout << "Probujesz ustawic mianownik na 0!\n";
+        u.mianownik = 1;
+    }
+    return u;
+}
+
 void przyjmij(Ulamek& u) {
     std::cout << "Podaj licznik:";
     std::cin >> u.licznik;
@@ -29,6 +40,11 @@ void przyjmij(Ulamek& u) {
         std::cout << "Podaj mianownik:";
         std::cin >> u.mianownik;
     } while (u.mianownik == 0);
+}
+
+void mnoz(Ulamek* u, const Ulamek& v) {
+    u->licznik *= v.licznik;
+    u->mianownik *= v.mianownik;
 }
 
 int main() {
@@ -40,6 +56,8 @@ int main() {
     Ulamek v;
     ustaw(&v, 2, 3);
     wypisz(v);
-    mnoz(u, v); // mnozy `u` * `v` i wynik zapisuje w `u`
+    mnoz(&u, v); // mnozy `u` * `v` i wynik zapisuje w `u`
     wypisz(u); // 1/3 lub 2/6
+    Ulamek z = stworz(3, 5);
+    wypisz(z);
 }
