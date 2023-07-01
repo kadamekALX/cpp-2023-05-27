@@ -13,11 +13,13 @@ bool czy_na_planszy(unsigned x, unsigned y) {
 }
 
 int ile_ruchow(int x, int y) {
-    const int fx[8] = {1, -1, 2, 2, 1, -1, -2, -2};
-    const int fy[8] = {2, 2, 1, -1, -2, -2, 1, -1};
+    const int ruch[8][2] = {
+        {1, 2}, {-1, 2}, {2, 1}, {2, -1},
+        {1, -2}, {-1, -2}, {-2, 1}, {-2, -1}
+    };
     int wynik = 0;
     for (unsigned i = 0; i < 8; i += 1) {
-        if (czy_na_planszy(x + fx[i], y + fy[i])) {
+        if (czy_na_planszy(x + ruch[i][0], y + ruch[i][1])) {
             wynik += 1;
         }
     }
