@@ -1,6 +1,8 @@
 #include <iostream>
 
-struct Ulamek {
+// class to to samo co struct, ale domyślnie ma wszystkie pola prywatne
+
+class Ulamek {
     //tylko metody tej klasy mają dostęp do pól prywatnych
 private: // od tego miejsca wszystko jest prywatne, tzn. jest widoczne tylko wewnątrz Ulamka
     int licznik;
