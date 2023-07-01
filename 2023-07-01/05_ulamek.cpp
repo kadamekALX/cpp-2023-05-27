@@ -22,11 +22,11 @@ void ustaw(Ulamek* u, int a, int b) {
 void przyjmij(Ulamek& u) {
     std::cout << "Podaj licznik:";
     std::cin >> u.licznik;
-    u.mianownik = 0;
-    while (u.mianownik == 0) {
+    
+    do {
         std::cout << "Podaj mianownik:";
         std::cin >> u.mianownik;
-    }
+    } while (u.mianownik == 0);
 }
 
 int main() {
