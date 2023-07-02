@@ -26,7 +26,11 @@ Element* dodaj(Element* lista, int nowa_wartosc) {
 
 //zwalnia pamięć zajętą przez listę
 void zwolnij(Element* lista) {
-    
+    while (lista != nullptr) {
+        Element* tmp = lista;
+        lista = lista->nast;
+        delete tmp;
+    }
 }
 
 // zwraca nową pustą listę
@@ -34,7 +38,9 @@ Element* nowa_lista() {
     return nullptr;
 }
 
-// using Lista = Element*;
+// napisz funkcję zwracającą długość listy
+// przerób kod tak, aby wywołanie tej funkcji działało w czasie O(1)
+// 2. Napisz funkcję, która dodaje element na koniec listy
 
 int main() {
     Element* lista = nowa_lista();
