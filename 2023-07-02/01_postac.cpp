@@ -12,45 +12,51 @@
 
 class Postac {
 public:
-    Postac(const std::string& imie, int maxHP)
-    {
-        this->imie = imie;
-        maxZdrowie = maxHP;
-        zdrowie = maxHP;
-    }
+    Postac(const std::string& imie, int maxHP);
     
-    void wypisz() const
-    {
-        std::cout << imie << ", zdrowie: " << zdrowie << "/" << maxZdrowie << '\n';
-    }
-    
-    bool czy_zyje() const
-    {
-        return zdrowie > 0;
-    }
-    
-    void otrzymaj_obrazenia(int ile)
-    {
-        zdrowie -= ile;
-        if (zdrowie < 0)
-            zdrowie = 0;
-    }
-    
-    void wylecz(int ile)
-    {
-        if (!czy_zyje())
-            return; //wychodzimy, bo nie mozna leczyc trupów
-        
-        zdrowie += ile;
-        if (zdrowie > maxZdrowie)
-            zdrowie = maxZdrowie;
-    }
-    
+    void wypisz() const;
+    bool czy_zyje() const;
+    void otrzymaj_obrazenia(int ile);
+    void wylecz(int ile);
 private:
     std::string imie;
     int maxZdrowie;
     int zdrowie;
 };
+
+Postac::Postac(const std::string& imie, int maxHP)
+{
+    this->imie = imie;
+    maxZdrowie = maxHP;
+    zdrowie = maxHP;
+}
+
+void Postac::wypisz() const
+{
+    std::cout << imie << ", zdrowie: " << zdrowie << "/" << maxZdrowie << '\n';
+}
+
+bool Postac::czy_zyje() const
+{
+    return zdrowie > 0;
+}
+
+void Postac::otrzymaj_obrazenia(int ile)
+{
+    zdrowie -= ile;
+    if (zdrowie < 0)
+        zdrowie = 0;
+}
+
+void Postac::wylecz(int ile) //implementujemy metodę `wylecz` z klasy `Postac`
+{
+    if (!czy_zyje())
+        return; //wychodzimy, bo nie mozna leczyc trupów
+
+    zdrowie += ile;
+    if (zdrowie > maxZdrowie)
+        zdrowie = maxZdrowie;
+}
 
 int main() {
     Postac rufus{"Rufus", 120};
