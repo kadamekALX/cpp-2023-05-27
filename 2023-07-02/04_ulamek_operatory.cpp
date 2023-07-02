@@ -17,6 +17,7 @@ public:
     Ulamek operator+(const Ulamek& inny) const;
     
     bool operator<(const Ulamek& inny) const;
+    bool operator>(const Ulamek& inny) const;
 
 private:
     int licznik;
@@ -69,6 +70,17 @@ Ulamek Ulamek::operator+(const Ulamek& inny) const {
 bool Ulamek::operator<(const Ulamek& inny) const {
     return licznik * inny.mianownik < mianownik * inny.licznik;
 }
+
+
+// *this > inny -> inny < *this
+bool Ulamek::operator>(const Ulamek& inny) const {
+    return inny < *this; //*this to _TEN SAM_ obiekt, na którym została wywołana metoda
+}
+
+// a == b <==> !(a < b) && !(b < a)
+// a != b <==> !(a == b)
+// a <= b <==> !(a > b)
+// a >= b <==> !(a < b)
 
 int main() {
     Ulamek a{1, 2};
