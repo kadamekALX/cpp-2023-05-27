@@ -6,12 +6,22 @@ struct Element {
 };
 
 void wypisz(const Element* lista) {
-    
+    for (const Element* e = lista; e != nullptr; e = e->nast) {
+        std::cout << e->wartosc << ' ';
+    }
+    std::cout << '\n';
 }
 
 //dodaje nowy element na poczatku listy i zwraca adres tego elementu
 Element* dodaj(Element* lista, int nowa_wartosc) {
-    
+    //stwórz nowy element (new)
+    Element* nowy = new Element;
+    //uzupelnij wartosc
+    nowy->wartosc = nowa_wartosc;
+    //uzupelnij wskaznij nast
+    nowy->nast = lista;
+//     zwroc adres nowego elementu
+    return nowy;
 }
 
 //zwalnia pamięć zajętą przez listę
@@ -31,6 +41,9 @@ int main() {
     lista = dodaj(lista, 5);
     lista = dodaj(lista, 10);
     lista = dodaj(lista, 15);
+    for (int i = 0; i < 10; i += 1) {
+        lista = dodaj(lista, i);
+    }
     wypisz(lista); // 15 10 5
     
     zwolnij(lista); //zwalniamy pamięć
