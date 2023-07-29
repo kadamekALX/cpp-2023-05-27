@@ -12,6 +12,8 @@ public:
     void operator=(const Tablica& inna); //kopiujący operator przypisania
     
     T& operator[](unsigned indeks);
+    const T& operator[](unsigned indeks) const; // można "przeładować" metodę po `const` - naprawdę wpływa to na constowość wskaźnika `this`
+    
     void wyswietl() const;
     
     unsigned getRozmiar() const { return rozmiar; }
@@ -61,8 +63,16 @@ void Tablica<T>::operator=(const Tablica& inna) {
 
 template <typename T>
 T& Tablica<T>::operator[](unsigned indeks) {
+//     std::cout << "nie const\n";
     return tab[indeks];
 }
+
+template <typename T>
+const T& Tablica<T>::operator[](unsigned indeks) const {
+//     std::cout << "const\n";
+    return tab[indeks];
+}
+
 
 template <typename T>
 void Tablica<T>::wyswietl() const {
