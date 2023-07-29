@@ -4,12 +4,12 @@
 template <typename T>
 class Tablica {
 public:
-    Tablica(unsigned rozmiar);
+    Tablica(unsigned rozmiar = 1);
     Tablica(const Tablica& kopia_tablicy);
 //     Tablica(Tablica&& tymczasowa); //move constructor | Typ&& - rvalue reference
     ~Tablica();
     
-    void operator=(const Tablica& inna); //kopiujący operator przypisania
+    Tablica<T>& operator=(const Tablica& inna); //kopiujący operator przypisania
     
     T& operator[](unsigned indeks);
     const T& operator[](unsigned indeks) const; // można "przeładować" metodę po `const` - naprawdę wpływa to na constowość wskaźnika `this`
@@ -44,11 +44,11 @@ Tablica<T>::Tablica(const Tablica& kopia_tablicy) : rozmiar(kopia_tablicy.rozmia
 }
 
 template <typename T>
-void Tablica<T>::operator=(const Tablica& inna) {
+Tablica<T>& Tablica<T>::operator=(const Tablica& inna) {
     if (this == &inna) //x = x;
     {
         std::cout << "samoprzypisanie!\n";
-        return;
+        return *this;
     }
     
     delete[] tab; // zwalniamy starą pamięć
@@ -58,6 +58,7 @@ void Tablica<T>::operator=(const Tablica& inna) {
     for (unsigned i = 0; i < rozmiar; i += 1) {
         tab[i] = inna.tab[i];
     }
+    return *this;
 }
 
 
@@ -81,12 +82,28 @@ void Tablica<T>::wyswietl() const {
     }
 }
 
+
 void wypisz(const Tablica<int>& tab) {
     for (unsigned i = 0; i < tab.getRozmiar(); i += 1) {
         std::cout << tab[i] << ' ';
     }
     std::cout << '\n';
 }
+
+// std::cout jest obiektem typu std::ostream
+template <typename T>
+std::ostream& operator<<(std::ostream& os, const Tablica<T>& tab) {
+    os << '[';
+    for (unsigned i = 0; i < tab.getRozmiar(); i += 1) {
+        if (i > 0)
+            os << ", ";
+        os << tab[i];
+    }
+    os << ']';
+    return os;
+}
+
+//Dodatkowe zadanie: zaimplementować odpowiednik metody push_back
 
 int main() {
     Tablica<int> tab{5};
@@ -95,7 +112,9 @@ int main() {
     }
     tab.wyswietl();
     
-    tab = tab;
+    tab = (tab = (tab = tab));
+//     int a, b, c;
+//     a = (b = (c = 0));
     
     Tablica<int> tab2 = tab; //tab2{tab}
 //     Tablica<int> tab3{Tablica<int>{10}}; // tu może przydać się move constructor
@@ -104,5 +123,14 @@ int main() {
     tab = tab2; // tab.operator=(tab2);
     tab.wyswietl();
     wypisz(tab);
+    
+    std::cout << tab << '\n';
+//     std::cout.operator<<(tab); lub operator<<(std::cout, tab);
+
+    Tablica<Tablica<int>> tt{3};
+    for (unsigned i = 0; i < 3; i += 1) {
+        tt[i] = tab;
+    }
+    std::cout << tt << '\n';
 }
 
