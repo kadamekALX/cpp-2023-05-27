@@ -6,23 +6,30 @@ GameWidget::GameWidget(QWidget *parent)
     : QWidget(parent)
 {
     setFixedSize(500, 500);
+    for (int i = 0; i < 5; i += 1) {
+        for (int j = 0; j < 5; j += 1) {
+            state[i][j] = (i + j) % 3 == 0;
+        }
+    }
 }
 
 GameWidget::~GameWidget()
 {
 }
 
-
-
-//Narysuj na całym widżecie na przemian czerwone i zielone
-//kwadraty 100x100 (jak na szachownicy)
+//zaimplementuj mousePressEvent, ktory na podstawie
+//wspolrzednych klikniecia przełączy odpowiednie pole w tablicy
 
 void GameWidget::paintEvent(QPaintEvent *event)
 {
     QPainter malarz{this};
-    malarz.drawLine(100, 100, 400, 300);
-    malarz.drawRect(50, 50, 300, 100);
-    QBrush pedzel{Qt::red};
-    malarz.fillRect(400, 300, 100, 100, pedzel);
+    QBrush czerwony{Qt::red};
+    QBrush zielony{Qt::green};
+    for (int i = 0; i < 5; i += 1) {
+        for (int j = 0; j < 5; j += 1) {
+//            malarz.fillRect(100 * j, 100 * i, 100, 100, ((i + j) % 2 == 0 ? czerwony : zielony));
+            malarz.fillRect(100 * j, 100 * i, 100, 100, (state[j][i] ? czerwony : zielony));
+        }
+    }
 }
 

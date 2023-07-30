@@ -15,5 +15,8 @@ public:
 
 protected:
     void paintEvent(QPaintEvent *event) override;
+
+private:
+    bool state[5][5];
 };
 #endif // GAMEWIDGET_H
