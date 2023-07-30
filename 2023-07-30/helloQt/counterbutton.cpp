@@ -10,3 +10,10 @@ void CounterButton::buttonClicked()
 {
     setText(QString::number(++counter));
 }
+
+void CounterButton::resetCounter()
+{
+    counter = 0;
+    setText("0");
+}
+

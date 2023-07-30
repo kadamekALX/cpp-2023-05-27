@@ -10,6 +10,7 @@ public:
     CounterButton(QWidget* parent);
 public slots:
     void buttonClicked();
+    void resetCounter();
 
 private:
     int counter;

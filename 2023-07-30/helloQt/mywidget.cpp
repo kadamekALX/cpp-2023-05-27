@@ -11,23 +11,20 @@ MyWidget::MyWidget(QWidget *parent)
     //siatkę 5x5 przycisków CounterButton
     //Dodatkowo wyświetl przycisk, którego naciśnięcie
     //zresetuje wszystkie liczniki
+    QPushButton* reset = new QPushButton{"RESET", this};
 
-    resize(500, 500);
-    QHBoxLayout* layout = new QHBoxLayout{this};
-    layout->addWidget(new CounterButton{this});
-    QBoxLayout* pionowy = new QVBoxLayout{};
-    layout->addLayout(pionowy);
-    pionowy->addWidget(new CounterButton{this});
-    pionowy->addWidget(new CounterButton{this});
-    pionowy->addWidget(new CounterButton{this});
-    layout->addWidget(new CounterButton{this});
-//    for (int i = 0; i < 5; i += 1) {
-//        for (int j = 0; j < 5; j += 1) {
-//            CounterButton* btn = new CounterButton{this};
-//            btn->move(100 * j, 100 * i);
-//            btn->resize(100, 100);
-//        }
-//    }
+    QHBoxLayout* glowny_layout = new QHBoxLayout{this};
+    for (int i = 0; i < 5; i += 1) {
+        QVBoxLayout* pionowy = new QVBoxLayout{};
+        glowny_layout->addLayout(pionowy);
+        for (int j = 0; j < 5; j += 1) {
+
+            CounterButton* btn = new CounterButton{this};
+            connect(reset, &QPushButton::clicked, btn, &CounterButton::resetCounter);
+            pionowy->addWidget(btn);
+        }
+    }
+    glowny_layout->addWidget(reset);
 }
 
 MyWidget::~MyWidget()
