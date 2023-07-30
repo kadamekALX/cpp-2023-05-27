@@ -1,33 +1,21 @@
 #include "mywidget.h"
 
 #include <iostream>
-#include <QPushButton>
+#include "counterbutton.h"
 
 MyWidget::MyWidget(QWidget *parent)
-    : QWidget(parent), counter{0}, counter2{0}
+    : QWidget(parent)
 {
-    resize(600, 400);
-    btn = new QPushButton{"0", this};
-    btn->move(100, 200);
-    btn2 = new QPushButton{"0", this};
-    connect(btn, &QPushButton::clicked, this, &MyWidget::buttonClicked);
-    connect(btn2, &QPushButton::clicked, this, &MyWidget::buttonClicked2);
+    resize(500, 500);
+    for (int i = 0; i < 5; i += 1) {
+        for (int j = 0; j < 5; j += 1) {
+            CounterButton* btn = new CounterButton{this};
+            btn->move(100 * j, 100 * i);
+            btn->resize(100, 100);
+        }
+    }
 }
 
 MyWidget::~MyWidget()
 {
 }
-
-void MyWidget::buttonClicked()
-{
-    counter += 1;
-    btn->setText(QString::number(counter));
-}
-
-void MyWidget::buttonClicked2()
-{
-    counter2 += 1;
-    btn2->setText(QString::number(counter2));
-}
-
-//Stwórz 2 przyciski z niezależnymi licznikami
