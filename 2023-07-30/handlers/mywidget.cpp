@@ -1,3 +1,4 @@
+#include "mybutton.h"
 #include "mywidget.h"
 
 #include <QResizeEvent>
@@ -6,6 +7,11 @@
 MyWidget::MyWidget(QWidget *parent)
     : QWidget(parent)
 {
+    MyButton* btn = new MyButton{this};
+    btn->resize(300, 200);
+    QPushButton* b = new QPushButton{"Przycisk", this};
+    b->resize(300, 200);
+    b->move(300, 0);
 }
 
 
