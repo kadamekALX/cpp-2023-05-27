@@ -17,5 +17,6 @@ public slots:
 
 private:
    QPushButton* btn;
+   int counter;
 };
 #endif // MYWIDGET_H
