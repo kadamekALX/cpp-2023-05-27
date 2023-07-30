@@ -17,3 +17,9 @@ void MyButton::mousePressEvent(QMouseEvent *event)
     setText(QString::number(x) + " " + QString::number(y));
     QPushButton::mousePressEvent(event);
 }
+
+void MyButton::mouseReleaseEvent(QMouseEvent *event)
+{
+    setText("");
+    QPushButton::mouseReleaseEvent(event);
+}
